@@ -4,7 +4,7 @@
 	--------
 	A Perl DBD driver for the Cego database system
 
-	Version 1.1.13
+	Version 1.1.14
 
 	(C)opyright 2007, 2008, 2009, 2010 Bjoern Lemke
 
@@ -14,13 +14,19 @@ Requirements
 -----------
 To build the Cego DBD driver, you need the following library packages available from www.lemke-it.com:
    
-   lfc-1.1.34.tar.gz
-   lfcxml-1.0.23.tar.gz
-   cego-2.6.14.tar.gz ( client library )	
+   lfc-1.1.35.tar.gz
+   lfcxml-1.0.24.tar.gz
+   cego-2.7.3.tar.gz ( client library )	
 
 Tested platforms and compliers
 ----------------------------
-Cego DBD is pretty new and has just been tested on Mac OS X and Solaris x86
+Cego DBD has just been tested for the following platforms
+
+     Mac OS X
+     Solaris SPARC/x86
+     Ubuntu Linux 10.10
+     FreeBSD 8.1
+
 using  GNU C++ compiler
 
 Please note: Cego DBD uses the XS API in combination with C++ libraries.

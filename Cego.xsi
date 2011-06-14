@@ -8,7 +8,6 @@
 
 #include "Driver_xst.h"
 
-
 MODULE = DBD::Cego  PACKAGE = DBD::Cego
 
 REQUIRE:    1.929
@@ -30,10 +29,10 @@ BOOT:
 MODULE = DBD::Cego  PACKAGE = DBD::Cego::dr
 
 
-void
-dbixs_revision(...)
-    PPCODE:
-    ST(0) = sv_2mortal(newSViv(DBIXS_REVISION));
+# void
+# dbixs_revision(...)
+#    PPCODE:
+#    ST(0) = sv_2mortal(newSViv(DBIXS_REVISION));
 
 
 #ifdef dbd_discon_all

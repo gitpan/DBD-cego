@@ -176,7 +176,7 @@ cego_db_rollback(SV *dbh, imp_dbh_t *imp_dbh)
 
 
     if (DBIc_is(imp_dbh, DBIcf_AutoCommit)) {
-        warn("rollback ineffective with AutoCommit");
+        warn("Rollback ineffective with AutoCommit");
         return TRUE;
     }
 
@@ -218,7 +218,7 @@ cego_db_begin(SV *dbh, imp_dbh_t *imp_dbh)
     }
 
     if (DBIc_is(imp_dbh, DBIcf_AutoCommit)) {
-        warn("commit ineffective with AutoCommit");
+        warn("Commit ineffective with AutoCommit");
         return TRUE;
     }
 
@@ -260,7 +260,7 @@ cego_db_commit(SV *dbh, imp_dbh_t *imp_dbh)
 
 
     if (DBIc_is(imp_dbh, DBIcf_AutoCommit)) {
-        warn("commit ineffective with AutoCommit");
+        warn("Commit ineffective with AutoCommit");
         return TRUE;
     }
 
@@ -427,7 +427,7 @@ cego_st_execute (SV *sth, imp_sth_t *imp_sth)
     {
 	Chain execmsg;
 	e.pop(execmsg);
-	Chain msg = Chain("Query failed :") + execmsg;
+	Chain msg = Chain("Query failed : ") + execmsg;
 	cego_error(sth, 1, (char*)msg ); 
 	return -1;
     }
@@ -600,7 +600,6 @@ cego_st_fetch (SV *sth, imp_sth_t *imp_sth)
 	    av = Nullav;
 	    
 	}
-       
     }
     catch ( Exception e )
     {
