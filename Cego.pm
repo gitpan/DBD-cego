@@ -4,7 +4,7 @@ use strict;
 use DBI;
 
 use vars qw($err $errstr $state $drh $VERSION @ISA);
-$VERSION = '1.1.14';
+$VERSION = '1.1.15';
 
 use DynaLoader();
 @ISA = ('DynaLoader');
@@ -114,7 +114,7 @@ This is the standard DBI API. Please see L<DBI> for more details about core feat
 
 =head1 BUGS
 
-Cego DBD is pretty fresh, so there are expected some bugs
+There are no known bugs
 
 =head1 AUTHOR
 

@@ -4,9 +4,9 @@
 	--------
 	A Perl DBD driver for the Cego database system
 
-	Version 1.1.14
+	Version 1.1.15
 
-	(C)opyright 2007, 2008, 2009, 2010 Bjoern Lemke
+	(C)opyright 2007,2008,2009,2010,2011,2012 Bjoern Lemke
 
 	This software comes under the GNU general public license
 
@@ -14,9 +14,9 @@ Requirements
 -----------
 To build the Cego DBD driver, you need the following library packages available from www.lemke-it.com:
    
-   lfc-1.1.35.tar.gz
-   lfcxml-1.0.24.tar.gz
-   cego-2.7.3.tar.gz ( client library )	
+   lfc-1.2.0.tar.gz
+   lfcxml-1.0.26.tar.gz
+   cego-2.12.4.tar.gz ( client library )	
 
 Tested platforms and compliers
 ----------------------------
@@ -25,7 +25,7 @@ Cego DBD has just been tested for the following platforms
      Mac OS X
      Solaris SPARC/x86
      Ubuntu Linux 10.10
-     FreeBSD 8.1
+     FreeBSD 8.2 / 9.0
 
 using  GNU C++ compiler
 
@@ -46,6 +46,10 @@ Run make
     $ make
 
 This builds the complete DBD driver. 
+
+Please note : With the generated file Cego.xsi, compile problems might occur with
+              current C++-Compilers ( constant cast problem ) 
+	      If this happens, please replace the file Cego.xsi with Cego.xsi.patched
 
 To test the driver, you first have to build up a cego database and start up the daemon.
 Edit the connection parameter file dbd.def and put in the appropriate database connection parameters

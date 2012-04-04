@@ -396,16 +396,23 @@ cego_st_execute (SV *sth, imp_sth_t *imp_sth)
 		if ( pParam->getRef() == 0 )
 		    stmt += pParam->getValue() + *pChunk; 
 		else
-		    stmt += Chain(":p") + pParam->getId() + *pChunk;
-		
-		pChunk = imp_sth->stmtChunks->Next();
+		    stmt += Chain(":p") + pParam->getId() + *pChunk;	       
 	    }
 	    else
 	    {
+		
+		// if parameter not set, we set null value
+
+		stmt += Chain(" null ") + *pChunk;		
+
+		/*
 		Chain msg = Chain("Missing parameter at position ") + Chain(pos);
 		cego_error(sth, 1, (char*)msg);
 		return -1;
+		*/
 	    }
+
+	    pChunk = imp_sth->stmtChunks->Next();
 
 	    pos++;
 	}
