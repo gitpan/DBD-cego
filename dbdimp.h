@@ -39,6 +39,7 @@
 
 #define MAXLOGFILE 100
 #define MAXLOGMODE 10
+#define MAXPROTSTRING 10
 
 class CegoDBDParam {
 
@@ -132,6 +133,7 @@ struct imp_dbh_st {
     int port;
     char logfile[MAXLOGFILE];
     char logmode[MAXLOGMODE];
+    char protocol[MAXPROTSTRING];
     bool activeTransaction;
     bool activeQuery;
     

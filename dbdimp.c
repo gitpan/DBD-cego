@@ -90,8 +90,20 @@ cego_db_login(SV *dbh, imp_dbh_t *imp_dbh, char *dbname, char *user, char *pass)
 
     Chain logFile(imp_dbh->logfile);
     Chain logMode(imp_dbh->logmode);
+    Chain prot(imp_dbh->protocol);
     
-    imp_dbh->cgnet = new CegoNet( logFile, logMode );
+    CegoDbHandler::ProtocolType protocol;
+    if ( prot == Chain("serial"))
+	protocol=CegoDbHandler::SERIAL;
+    else if ( prot == Chain("xml"))
+	protocol=CegoDbHandler::XML;
+    else
+    {
+	cego_error(dbh, 1, "Invalid protocol" );	
+	return FALSE;
+    }
+
+    imp_dbh->cgnet = new CegoNet( protocol, logFile, logMode );
     
     try
     {
@@ -382,8 +394,7 @@ cego_st_execute (SV *sth, imp_sth_t *imp_sth)
 	{
 	    stmt = *pChunk;
 	}
-	
-
+       
 	pChunk = imp_sth->stmtChunks->Next();
 	while ( pChunk )
 	{
@@ -471,6 +482,7 @@ cego_st_execute (SV *sth, imp_sth_t *imp_sth)
 		    }
 		    else if ( pParam->getId() == 1 )
 		    {
+			
 			sv_setpv(pSV, (char*)retValue.valAsChain()); 
 		    }		    
 		}	  
@@ -571,7 +583,7 @@ cego_st_fetch (SV *sth, imp_sth_t *imp_sth)
     Chain msg;
     CegoDbHandler::ResultType res;
     
-    ListT<CegoField> fvl;
+    ListT<CegoFieldValue> fvl;
 
     try
     {
@@ -579,20 +591,20 @@ cego_st_fetch (SV *sth, imp_sth_t *imp_sth)
 	{
 	    av = DBIS->get_fbav(imp_sth);
 	    int pos=0;
-	    CegoField *pF = fvl.First();
-	    while ( pF )
+	    CegoFieldValue *pFV = fvl.First();
+	    while ( pFV )
 	    {
-		if ( pF->getValue().isNull() )
+		if ( pFV->isNull() )
 		{
 		    sv_setpvn(AvARRAY(av)[pos], 0, 0);
 		}
 		else
 		{ 
 		    sv_setpvn(AvARRAY(av)[pos], 
-			      pF->getValue().valAsChain(),
-			      pF->getValue().valAsChain().length() - 1 );
+			      pFV->valAsChain(),
+			      pFV->valAsChain().length() - 1 );
 		} 
-		pF = fvl.Next();
+		pFV = fvl.Next();
 		pos++;
 	    }
 	    fvl.Empty();    
@@ -704,6 +716,11 @@ cego_db_STORE_attrib (SV *dbh, imp_dbh_t *imp_dbh, SV *keysv, SV *valuesv)
     if (strncmp(key, "logmode", 7) == 0) 
     {
 	strcpy(imp_dbh->logmode, val); 
+	return TRUE;
+    }
+    if (strncmp(key, "protocol", 8) == 0) 
+    {
+	strcpy(imp_dbh->protocol, val); 
 	return TRUE;
     }
     if (strncmp(key, "port", 4) == 0) 

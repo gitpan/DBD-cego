@@ -4,7 +4,7 @@
 	--------
 	A Perl DBD driver for the Cego database system
 
-	Version 1.1.15
+	Version 1.2.0
 
 	(C)opyright 2007,2008,2009,2010,2011,2012 Bjoern Lemke
 
@@ -14,9 +14,9 @@ Requirements
 -----------
 To build the Cego DBD driver, you need the following library packages available from www.lemke-it.com:
    
-   lfc-1.2.0.tar.gz
+   lfc-1.3.0.tar.gz
    lfcxml-1.0.26.tar.gz
-   cego-2.12.4.tar.gz ( client library )	
+   cego-2.13.0.tar.gz ( client library )	
 
 Tested platforms and compliers
 ----------------------------

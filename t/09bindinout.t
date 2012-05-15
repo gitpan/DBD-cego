@@ -9,7 +9,7 @@ chop $line;
 my ($host, $port,$tableset,$user,$pwd) = split(/:/,$line );
 close(DEF);
 
-my $dbh = DBI->connect("dbi:Cego:tableset=$tableset;hostname=$host;port=$port;logfile=cegoDBD.log;logmode=debug", "$user", "$pwd");
+my $dbh = DBI->connect("dbi:Cego:tableset=$tableset;hostname=$host;port=$port;protocol=serial;logfile=cegoDBD.log;logmode=debug", "$user", "$pwd");
 ok($dbh);
 
 $dbh->do("drop if exists procedure myInOut;");
@@ -45,14 +45,13 @@ print "retVar=" . $retVar ."\n";
 print "outVar=" . $outVar ."\n";
 print "xVar=" . $xVar ."\n";
 
-
 if ( $outVar eq "TestString" )
 {
     ok( 1 );
 }
 else   
 {
-   ok( 0 );	
+   ok( 0 );
 }
 $sth->finish;
 ok($sth);

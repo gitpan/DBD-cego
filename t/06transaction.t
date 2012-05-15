@@ -10,7 +10,7 @@ chop $line;
 my ($host, $port,$tableset,$user,$pwd) = split(/:/, $line );
 close(DEF);
 
-my $dbh = DBI->connect("dbi:Cego:tableset=$tableset;hostname=$host;port=$port;logfile=cegoDBD.log;logmode=debug", "$user", "$pwd", { AutoCommit => 0} );
+my $dbh = DBI->connect("dbi:Cego:tableset=$tableset;hostname=$host;port=$port;protocol=serial;logfile=cegoDBD.log;logmode=debug", "$user", "$pwd", { AutoCommit => 0} );
 ok($dbh);
 
 my $sth = $dbh->prepare("insert into tab1 values ( ? , ? );");
