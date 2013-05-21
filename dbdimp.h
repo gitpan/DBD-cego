@@ -30,8 +30,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#include <lfc/NetHandler.h>
-#include <lfc/ListT.h>
+#include <lfcbase/NetHandler.h>
+#include <lfcbase/ListT.h>
 
 #include <cego/CegoNet.h>
 #include <cego/CegoField.h>

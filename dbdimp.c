@@ -27,9 +27,9 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <lfc/Tokenizer.h>
-#include <lfc/Net.h>
-#include <lfc/NetHandler.h>
+#include <lfcbase/Tokenizer.h>
+#include <lfcbase/Net.h>
+#include <lfcbase/NetHandler.h>
 
 #include <cego/CegoTableObject.h>
 #include <cego/CegoViewObject.h>
@@ -99,7 +99,7 @@ cego_db_login(SV *dbh, imp_dbh_t *imp_dbh, char *dbname, char *user, char *pass)
 	protocol=CegoDbHandler::XML;
     else
     {
-	cego_error(dbh, 1, "Invalid protocol" );	
+	cego_error(dbh, 1, (char*)"Invalid protocol" );	
 	return FALSE;
     }
 

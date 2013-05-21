@@ -46,7 +46,7 @@ WriteMakefile(
     'INC'           => '-I$(DBI_INSTARCH_DIR) -I' . $opt->{'prefix'} . '/include -I' . $opt->{'prefix'} . '/include',
     'MYEXTLIB'    => $opt->{'prefix'} . "/lib/libcego.a " 
 	      . $opt->{'prefix'} . "/lib/liblfcxml.a " 
-	      . $opt->{'prefix'} . "/lib/liblfc.a",
+	      . $opt->{'prefix'} . "/lib/liblfcbase.a",
     "CC" => "g++",
     "LD" => "g++",
     "XSPROTOARG" => "-noprototypes",
