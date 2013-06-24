@@ -1,7 +1,7 @@
 use Test;
 use DBI qw(:sql_types);
 
-BEGIN { plan tests => 4 }
+BEGIN { plan tests => 6 }
 use DBI;
 
 open(DEF, "<dbd.def ") || die "File dbd.def not found\n";
@@ -18,14 +18,14 @@ ok($sth);
 
 $sth->bind_param(1, 55, SQL_INTEGER);
 $sth->bind_param(2, 'udo', SQL_VARCHAR );
+$sth->execute;
+ok($sth);
 
 $sth->bind_param(1, 66, SQL_INTEGER);
+$sth->bind_param(2, undef, SQL_VARCHAR );
+ok($sth);
 
-$sth->execute;
-# $sth->execute;
-# $sth->execute;
 $sth->finish();
-
 ok($sth);
 
 $dbh->{AutoCommit} = 1;

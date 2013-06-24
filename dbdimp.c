@@ -8,22 +8,7 @@
 //                                               
 // Design and Implementation by Bjoern Lemke               
 //                                                         
-// (C)opyright 2007,2008,2009,2010 by Bjoern Lemke                        
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2, or (at your option)
-// any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; see the file COPYING.  If not, write to
-// the Free Software Foundation, 59 Temple Place - Suite 330,
-// Boston, MA 02111-1307, USA.
+// (C)opyright 2007-2013 by Bjoern Lemke                        
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -521,7 +506,12 @@ cego_bind_ph (SV *sth, imp_sth_t *imp_sth,
     char *pval = SvPV(value, myPL_na);
 
     Chain qVal;
-    if ( sql_type == SQL_VARCHAR ) 
+
+    if ( *pval == 0 )
+    {
+	qVal = Chain("null");
+    }
+    else if ( sql_type == SQL_VARCHAR ) 
     {
 	qVal = Chain("'") + Chain(pval) + Chain("'");
     }
@@ -548,7 +538,7 @@ cego_bind_ph (SV *sth, imp_sth_t *imp_sth,
 	else
 	{
 	    CegoDBDParam *pParam;
-	    if ( pParam = imp_sth->paramList->Find( CegoDBDParam(id) ))
+	    if ( ( pParam = imp_sth->paramList->Find( CegoDBDParam(id) )) != 0 )
 	    {
 		pParam->setValue(qVal);
 	    }
