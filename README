@@ -1,22 +1,21 @@
 
-
 	Cego-DBD
 	--------
 	A Perl DBD driver for the Cego database system
 
-	Version 1.2.3
+	Version 1.2.4
 
-	(C)opyright 2007,2008,2009,2010,2011,2012 Bjoern Lemke
+	(C)opyright 2007,2008,2009,2010,2011,2012,2013 Bjoern Lemke
 
 	This software comes under the GNU general public license
 
 Requirements
 -----------
 To build the Cego DBD driver, you need the following library packages available from www.lemke-it.com:
-   
+
    lfcbase-1.5.5.tar.gz
    lfcxml-1.1.4.tar.gz
-   cego-2.18.9.tar.gz ( client library )	
+   cego-2.18.9.tar.gz ( client library )
 
 Tested platforms and compliers
 ----------------------------
@@ -25,9 +24,10 @@ Cego DBD has just been tested for the following platforms
      Mac OS X
      Solaris SPARC/x86
      Ubuntu Linux 10.10
-     FreeBSD 8.2 / 9.0
+     Fedora 19
+     FreeBSD 8.x / 9.x
 
-using  GNU C++ compiler
+using the GNU C++ or clang++ compiler
 
 Please note: Cego DBD uses the XS API in combination with C++ libraries.
 There are still expected some problems with different platforms.
@@ -38,22 +38,20 @@ Run the configure script with the following options
 
     $ perl Makefile.PL --prefix=<prefix-dir>
 
-where prefix-dir is the base directory of the previous installed base, 
+where prefix-dir is the base directory of the previous installed base,
 xml and Cego client header files and libraries ( e.g. /usr/local ).
 
 Run make
 
     $ make
 
-This builds the complete DBD driver. 
+This builds the complete DBD driver.
 
-Please note : With the generated file Cego.xsi, compile problems might occur with
-              current C++-Compilers ( constant cast problem ) 
-	      If this happens, please replace the file Cego.xsi with Cego.xsi.patched
+To test the driver, you first have to build up a cego database and
+start up the daemon.
 
-To test the driver, you first have to build up a cego database and start up the daemon.
-Edit the connection parameter file dbd.def and put in the appropriate database connection parameters
-in the first line.
+Edit the connection parameter file dbd.def and put in the appropriate
+database connection parameters in the first line.
 
 The following format ist required
 
@@ -72,4 +70,5 @@ If succesful, deliver the package with
 For more information about how to use Cego DBD, please refer to the HTML-based
 documentation on www.lemke-it.com
 
-Have fun ! 
+Have fun !
+
