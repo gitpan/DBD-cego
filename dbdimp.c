@@ -413,9 +413,16 @@ cego_st_execute (SV *sth, imp_sth_t *imp_sth)
 	    pos++;
 	}
     }
-    
-    if (stmt.cutTrailing(" ;") == Chain("quit") )
+
+
+    // normalize to plain statement
+    stmt = stmt.cutTrailing(" ;");
+   
+    if (stmt == Chain("quit") )
 	return 0;
+    
+    // cego parser expects trailing semicolon
+    stmt = stmt + Chain(";");
     
     if (! DBIc_is(imp_dbh, DBIcf_AutoCommit) && imp_dbh->activeTransaction == false) {
 	cego_db_begin(sth, imp_dbh);

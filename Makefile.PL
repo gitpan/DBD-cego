@@ -14,6 +14,8 @@ eval {
 };
 
 use ExtUtils::MakeMaker;
+use Config;
+
 # $CC = 'c++';
 
 use strict;
@@ -21,6 +23,7 @@ use Getopt::Long();
 
 use vars qw($opt);
 $opt = { "help" => \&Usage, };
+
 
 Getopt::Long::GetOptions(
     $opt,
@@ -37,6 +40,7 @@ if (! exists $opt->{'prefix'})
 
 use vars qw($loadlibs);
 $loadlibs= "-L" . $opt->{'prefix'} . " -llfc";
+my $so = $Config{so};
 
 WriteMakefile(
     'NAME'          => 'DBD::Cego',
@@ -44,9 +48,9 @@ WriteMakefile(
     'PREREQ_PM'     => {DBI => 1.03},
     'OBJECT'        => '$(O_FILES)',
     'INC'           => '-I$(DBI_INSTARCH_DIR) -I' . $opt->{'prefix'} . '/include -I' . $opt->{'prefix'} . '/include',
-    'MYEXTLIB'    => $opt->{'prefix'} . "/lib/libcego.a " 
-	      . $opt->{'prefix'} . "/lib/liblfcxml.a " 
-	      . $opt->{'prefix'} . "/lib/liblfcbase.a",
+    'MYEXTLIB'    => $opt->{'prefix'} . "/lib/libcego.$so* " 
+	      . $opt->{'prefix'} . "/lib/liblfcxml.$so* " 
+	      . $opt->{'prefix'} . "/lib/liblfcbase.$so",
     "CC" => "g++",
     "LD" => "g++",
     "XSPROTOARG" => "-noprototypes",
